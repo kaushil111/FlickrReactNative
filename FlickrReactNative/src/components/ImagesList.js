@@ -4,17 +4,24 @@ import axios from 'axios';
 import ImagesCard from './ImagesCard';
 
 class ImagesList extends Component {
-  state = { imagelist: [] };
+  state = { imageList: [] };
 
   componentWillMount() {
-      axios.get('https://rallycoding.herokuapp.com/api/music_albums')
-      .then(response => this.setState({ albums: response.data }));
+      axios.get('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=489386ece92b660c8eef44bf589ed379&text=Incredible+India&per_page=20&format=json&nojsoncallback=1')
+      .then(response => this.setState({ imageList: response.data.photos.photo }));
     }
+
+  renderImages() {
+    return this.state.imageList.map(
+      imageList => <ImagesCard key={imageList.id} photo={imageList} />
+    );
+  }
 
   render() {
     return (
       <View style={styles.containerStyle}>
-        <ImagesCard />
+        {/*console.log(this.state.imageList)*/}
+        {this.renderImages()}
       </View>
     );
   }
