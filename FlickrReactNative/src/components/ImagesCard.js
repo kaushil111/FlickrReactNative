@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Image, Text } from 'react-native';
+import { View, Image, Text, Dimensions } from 'react-native';
+
+const screenWidth = Dimensions.get('window').width;
 
 const ImagesCard = ({ photo }) => {
   const { id, farm, secret, server, title } = photo;
@@ -11,10 +13,12 @@ const ImagesCard = ({ photo }) => {
         source={{ uri: `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}_m.jpg` }}
       />
       <Text>{title}</Text>
-      {console.log(photo)}
+      {console.log(screenWidth)}
     </View>
   );
 };
+
+const aspectRatioForHeight = screenWidth * (9 / 16) ;
 
 const styles = {
   containerStyle: {
@@ -23,8 +27,10 @@ const styles = {
   },
   imageStyle: {
     justifyContent: 'center',
-    height: 150
+    height: aspectRatioForHeight - 20,
+    margin: 10
   }
 };
+
 
 export default ImagesCard;
