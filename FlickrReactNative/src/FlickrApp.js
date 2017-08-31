@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, StatusBar } from 'react-native';
 import { Header } from './components/common';
 import ImagesList from './components/ImagesList.js';
 
@@ -8,8 +8,13 @@ class FlickrApp extends Component {
 
   render() {
     return (
+
       <View style={styles.containerStyle}>
-        <Header title='Flickr' />
+        <StatusBar
+          barStyle="light-content"
+        />
+
+        <Header title='Photos' />
         <ImagesList style={styles.listStyle} />
       </View>
     );
