@@ -1,12 +1,19 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Dimensions } from 'react-native';
 
-const Header = (props) => {
-  const { viewStyle, textStyle } = styles;
+const screenWidth = Dimensions.get('window').width;
+
+const Header = ({ title, leftBarButtons, rightBarButtons }) => {
+  const { viewStyle, textStyle, leftBarButtonsStyle, rightBarButtonsStyle } = styles;
   return (
     <View style={viewStyle}>
-      <Text style={textStyle}>{props.title}</Text>
-      {props.children}
+      <View style={leftBarButtonsStyle}>
+        {leftBarButtons}
+      </View>
+      <Text numberOfLines={1} style={textStyle}>{title}</Text>
+      <View style={rightBarButtonsStyle}>
+        {rightBarButtons}
+      </View>
     </View>
   );
 };
@@ -14,7 +21,7 @@ const Header = (props) => {
 const styles = {
   viewStyle: {
     backgroundColor: '#1f849f',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
     height: 60,
     paddingTop: 15,
@@ -22,12 +29,28 @@ const styles = {
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.2,
     elevation: 2,
-    position: 'relative'
+    position: 'relative',
+    flexDirection: 'row'
   },
   textStyle: {
     fontFamily: 'Helvetica-Light',
-    fontSize: 24,
-    color: '#fff'
+    fontSize: 17,
+    color: '#fff',
+    maxWidth: screenWidth - 120,
+    marginLeft: 10,
+    marginRight: 10
+  },
+  leftBarButtonsStyle: {
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    minWidth: 40,
+    marginLeft: 10
+  },
+  rightBarButtonsStyle: {
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    minWidth: 40,
+    marginRight: 10
   }
 };
 
